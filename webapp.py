@@ -1,4 +1,3 @@
-Learn more or give us feedback
 from flask import Flask, redirect, url_for, session, request, jsonify
 from flask_oauthlib.client import OAuth
 from flask import render_template
