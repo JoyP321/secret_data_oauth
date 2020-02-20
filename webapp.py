@@ -54,11 +54,12 @@ def authorized():
             session['github_token'] = (resp['access_token'], '')
             session['user_data'] = github.get('user').data
             message = 'you were successfully logged in as' + session['user_data']['login'] +'.'
-            userLog += (session['user_data']['login']) + ", "
+            
         except Exception as inst:
             session.clear()
             print(inst)
             message = "So sorry, an error has occured. You have not logged in."
+    userLog += (session['user_data']['login']) + ", "
     return render_template('home.html', message=message)
 
 
