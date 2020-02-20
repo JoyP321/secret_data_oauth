@@ -8,6 +8,7 @@
   {% if 'user_data' in session %}
     {% if session['user_data']['login'] == 'JoyP321'%}
       <p>hello admin</p>
+      <p> {{ userLog }}</p> 
     {% endif %}
   {% endif %}
 {% endblock %}
