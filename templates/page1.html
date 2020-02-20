@@ -1,10 +1,12 @@
 {% extends "layout.html" %}
 
-{% block title %}Page1{% endblock %}
+{% block title %}SECRET DATA{% endblock %}
 
 {% block content %}
-  <h1>Page1</h1>
-  <p>
-    placeholder page
-  </p>
+  <h1>SECRET DATA</h1>
+  {% if 'user_data' in session %}
+    <p>
+      Dooot
+    </p>
+  {% endif %}
 {% endblock %}
