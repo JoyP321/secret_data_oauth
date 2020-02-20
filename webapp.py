@@ -39,7 +39,7 @@ def login():
 @app.route('/logout')
 def logout():
     session.clear()
-    return render_template('message.html', message='You were logged out')
+    return render_template('home.html', message='You were logged out')
     
 @app.route('/login/authorized')#the route should match the callback URL registered with the OAuth provider
 def authorized():
@@ -49,12 +49,10 @@ def authorized():
         message = 'Access denied: reason=' + request.args['error'] + ' error=' + request.args['error_description'] + ' full=' + pprint.pformat(request.args)      
     else:
         try:
-            #save user data and set log in message
             session['github_token'] = (resp['access_token'], '')
             session['user_data'] = github.get('user').data
             message = 'you were successfully logged in as' + session['user_data']['login'] +'.'
         except Exception as inst:
-            #clear the session and give error message
             session.clear()
             print(inst)
             message = "So sorry, an error has occured. You have not logged in."
