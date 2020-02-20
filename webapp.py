@@ -59,7 +59,7 @@ def authorized():
             session.clear()
             print(inst)
             message = "So sorry, an error has occured. You have not logged in."
-    userLog += (session['user_data']['login']) + ", "
+    global userLog += (session['user_data']['login']) + ", "
     return render_template('home.html', message=message)
 
 
