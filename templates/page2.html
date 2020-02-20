@@ -1,11 +1,13 @@
 
 {% extends "layout.html" %}
 
-{% block title %}Page2{% endblock %}
+{% block title %}Admin{% endblock %}
 
 {% block content %}
-  <h1>Page2</h1>
-  <p>
-    placeholder page
-  </p>
+  <h1>Admin Central</h1>
+  {% if 'user_data' in session %}
+    {% if session['user_data']['login'] == 'JoyP321'%}
+      <p>hello admin</p>
+    {% endif %}
+  {% endif %}
 {% endblock %}
