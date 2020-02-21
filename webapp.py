@@ -24,7 +24,8 @@ github = oauth.remote_app(
     authorize_url='https://github.com/login/oauth/authorize' #URL for github's OAuth login
 )
 
-userLog = ''
+validUserLog = ''
+notValidUserLog = ''
 
 @app.context_processor #sets logged_in variable for every page here instead of in render template
 def inject_logged_in():
@@ -55,10 +56,12 @@ def authorized():
             session['user_data'] = github.get('user').data
             if session['user_data']['public_repos'] >10:
                 message = 'you were successfully logged in as ' + session['user_data']['login'] +'.'
+                global validUserLog
+                validUserLog = validUserLog+ (session['user_data']['login']) + ', '
             else:
                 message = 'you are not qualified to view the very secret data, but you may log in'
-            global userLog
-            userLog = userLog+ (session['user_data']['login']) + ', '
+                global notValidUserLog
+                notValidUserLog = notValidUserLog+ (session['user_data']['login']) + ', '
         except Exception as inst:
             session.clear()
             message = "So sorry, an error has occured. You have not logged in."
@@ -71,7 +74,7 @@ def renderPage1():
 
 @app.route('/page2')
 def renderPage2():
-    return render_template('page2.html', userLog = "Log of users: " + userLog)
+    return render_template('page2.html', validUserLog = "Log of valid users: " + validUserLog, notValidUserLog = "Log of unauthorized users: " + notValidUserLog)
 
 
 @github.tokengetter #runs automatically. needed to confirm logged in
