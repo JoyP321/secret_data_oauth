@@ -9,8 +9,8 @@ app = Flask(__name__)
 
 app.debug = True 
 
-validUserLog = ''
-notValidUserLog = ''
+validUserLog = []
+notValidUserLog = []
 
 app.secret_key = os.environ['SECRET_KEY'] 
 oauth = OAuth(app)
@@ -58,11 +58,13 @@ def authorized():
             if session['user_data']['public_repos'] >10:
                 message = 'you were successfully logged in as ' + session['user_data']['login'] +'.'
                 global validUserLog
-                validUserLog = validUserLog+ (session['user_data']['login']) + ', '
+                if session['user_data']['login'] not in validUserLog:
+                    validUserLog.append(session['user_data']['login'] + ', ')
             else:
                 message = 'you are not qualified to view the very secret data, but you may log in'
                 global notValidUserLog
-                notValidUserLog = notValidUserLog+ (session['user_data']['login']) + ', '
+                if session['user_data']['login'] not in notValidUserLog:
+                    notValidUserLog.append(session['user_data']['login'] + ', ')
         except Exception as inst:
             session.clear()
             message = "So sorry, an error has occured. You have not logged in."
@@ -75,12 +77,18 @@ def renderPage1():
 
 @app.route('/page2')
 def renderPage2():
-    return render_template('page2.html', validUserLog = "Log of valid users: " + validUserLog, notValidUserLog = "Log of unauthorized users: " + notValidUserLog)
+    return render_template('page2.html', validUserLog = "Log of valid users: " + livalidUserLog, notValidUserLog = "Log of unauthorized users: " + notValidUserLog)
 
 
 @github.tokengetter #runs automatically. needed to confirm logged in
 def get_github_oauth_token():
     return session['github_token']
+
+def listToString(list):
+    toReturn= ''
+    for each in list:
+        toReturn = toReturn + each + ", "
+    return toReturn[0:-2]    
 
 
 if __name__ == '__main__':
