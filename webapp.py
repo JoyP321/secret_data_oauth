@@ -9,6 +9,9 @@ app = Flask(__name__)
 
 app.debug = True 
 
+validUserLog = ''
+notValidUserLog = ''
+
 app.secret_key = os.environ['SECRET_KEY'] 
 oauth = OAuth(app)
 
@@ -24,8 +27,6 @@ github = oauth.remote_app(
     authorize_url='https://github.com/login/oauth/authorize' #URL for github's OAuth login
 )
 
-validUserLog
-notValidUserLog
 
 @app.context_processor #sets logged_in variable for every page here instead of in render template
 def inject_logged_in():
