@@ -57,13 +57,11 @@ def authorized():
                 message = 'you were successfully logged in as ' + session['user_data']['login'] +'.'
             else:
                 message = 'you are not qualified to view the very secret data, but you may log in'
+            global userLog
             userLog = userLog+ (session['user_data']['login']) + ', '
         except Exception as inst:
             session.clear()
-            print(inst)
             message = "So sorry, an error has occured. You have not logged in."
-    global userLog
-    
     return render_template('home.html', message=message)
 
 
