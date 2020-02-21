@@ -5,8 +5,10 @@
 {% block content %}
   <h1>SECRET DATA</h1>
   {% if 'user_data' in session %}
-    <p>
-      doot
-    </p>
+    {% if session['user_data']['public_repos'] >10 %}
+      <p>The secret message is: hello and welcome to my page</p>
+    {% else %}
+      <p>you are not worthy of the secret message</p>
+    {% endif %}
   {% endif %}
 {% endblock %}
