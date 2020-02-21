@@ -53,7 +53,7 @@ def authorized():
         try:
             session['github_token'] = (resp['access_token'], '')
             session['user_data'] = github.get('user').data
-            message = 'you were successfully logged in as' + session['user_data']['login'] +'.'
+            message = 'you were successfully logged in as ' + session['user_data']['login'] +'.'
             
         except Exception as inst:
             session.clear()
@@ -70,7 +70,7 @@ def renderPage1():
 
 @app.route('/page2')
 def renderPage2():
-    return render_template('page2.html', userLog= userLog)
+    return render_template('page2.html', userLog = "Log of users: " + userLog)
 
 
 @github.tokengetter #runs automatically. needed to confirm logged in
