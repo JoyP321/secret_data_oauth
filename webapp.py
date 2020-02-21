@@ -54,7 +54,7 @@ def authorized():
         try:
             session['github_token'] = (resp['access_token'], '')
             session['user_data'] = github.get('user').data
-            if session['user_data']['public_repos'] <10:
+            if session['user_data']['public_repos'] >10:
                 message = 'you were successfully logged in as ' + session['user_data']['login'] +'.'
                 global validUserLog
                 validUserLog = validUserLog+ (session['user_data']['login']) + ', '
