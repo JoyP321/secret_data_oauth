@@ -79,8 +79,9 @@ def renderPage1():
 def renderPage2():
     global validUserLog
     global notValidUserLog
+    validUserLog.append("test")
     print(validUserLog)
-    return render_template('page2.html', validUserLog = "Log of valid users: " + listToString(validUserLog), notValidUserLog = "Log of unauthorized users: " + listToString(notValidUserLog))
+    return render_template('page2.html', validUserLog = "Log of valid users: " +validUserLog, notValidUserLog = "Log of unauthorized users: " + notValidUserLog)
 
 
 @github.tokengetter #runs automatically. needed to confirm logged in
@@ -89,8 +90,8 @@ def get_github_oauth_token():
 
 def listToString(list):
     toReturn= ''
-    for each in list:
-        toReturn = toReturn + each + ", "
+    for every in list:
+        toReturn = toReturn + every + ", "
     return toReturn[0:-2]    
 
 
