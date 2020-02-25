@@ -77,7 +77,7 @@ def renderPage1():
 
 @app.route('/page2')
 def renderPage2():
-    return render_template('page2.html', validUserLog = "Log of valid users: " + livalidUserLog, notValidUserLog = "Log of unauthorized users: " + notValidUserLog)
+    return render_template('page2.html', validUserLog = "Log of valid users: " + listToString(validUserLog), notValidUserLog = "Log of unauthorized users: " + listToString(notValidUserLog))
 
 
 @github.tokengetter #runs automatically. needed to confirm logged in
