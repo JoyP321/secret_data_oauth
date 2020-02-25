@@ -81,7 +81,7 @@ def renderPage2():
     global notValidUserLog
     validUserLog.append("test")
     print(validUserLog)
-    return render_template('page2.html', validUserLog = "Log of valid users: " +validUserLog, notValidUserLog = "Log of unauthorized users: " + notValidUserLog)
+    return render_template('page2.html', validUserLog = "Log of valid users: " + listToString(validUserLog), notValidUserLog = "Log of unauthorized users: " + listToString(notValidUserLog))
 
 
 @github.tokengetter #runs automatically. needed to confirm logged in
